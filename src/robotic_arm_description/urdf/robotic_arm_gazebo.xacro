@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+
+<robot name="robotic_arm"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="SCALE" value="10.0"/>
+
+  <!-- ============================================================
+       MATERIALS
+       ============================================================ -->
+
+  <material name="orange">
+    <color rgba="0.95 0.35 0.05 1.0"/>
+  </material>
+
+  <material name="orange_dark">
+    <color rgba="0.75 0.20 0.03 1.0"/>
+  </material>
+
+  <material name="yellow">
+    <color rgba="0.95 0.75 0.05 1.0"/>
+  </material>
+
+  <material name="blue_gray">
+    <color rgba="0.35 0.42 0.48 1.0"/>
+  </material>
+
+  <material name="dark_gray">
+    <color rgba="0.12 0.14 0.16 1.0"/>
+  </material>
+
+  <link name="world"/>
+
+  <joint name="world_to_base" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 ${0.005291644*SCALE}" rpy="0 0 0"/>
+      <mass value="5.0"/>
+      <inertia ixx="0.0582" ixy="0" ixz="0" iyy="0.0585" iyz="0" izz="0.1006"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/base.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="dark_gray"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/base.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint_1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link_1"/>
+    <origin xyz="0 0 ${0.013843*SCALE}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14159" upper="3.14159" effort="30.0" velocity="3.0"/>
+    <dynamics damping="1.5" friction="0.2"/>
+  </joint>
+
+  <link name="link_1">
+    <inertial>
+      <origin xyz="0 0 ${0.0093244125*SCALE}" rpy="0 0 0"/>
+      <mass value="3.5"/>
+      <inertia ixx="0.0235" ixy="0" ixz="0" iyy="0.0235" iyz="0" izz="0.00984"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 ${-0.013843*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link1.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 ${-0.013843*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link1.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint_2" type="revolute">
+    <parent link="link_1"/>
+    <child link="link_2"/>
+    <origin xyz="${0.012851259*SCALE} 0 ${0.016637*SCALE}" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.6" upper="2.6" effort="280.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.05"/>
+  </joint>
+
+  <link name="link_2">
+    <inertial>
+      <origin xyz="${-0.0053474247*SCALE} 0 ${-0.0003215252*SCALE}" rpy="0 0 0"/>
+      <mass value="4.0"/>
+      <inertia ixx="0.305181023827" ixy="0.000000738802" ixz="-0.082019239604"
+               iyy="0.361752536299" iyz="0.000002810836" izz="0.067654324643"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="${-0.012851259*SCALE} 0 ${-0.030480*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link2.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="blue_gray"/>
+    </visual>
+
+    <collision>
+      <origin xyz="${-0.012851259*SCALE} 0 ${-0.030480*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link2.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="link2_to_link3" type="fixed">
+    <parent link="link_2"/>
+    <child link="link_3"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="link_3">
+    <inertial>
+      <origin xyz="${0.0000161292*SCALE} 0 ${0.0292437523*SCALE}" rpy="0 0 0"/>
+      <mass value="1.5"/>
+      <inertia ixx="0.0443" ixy="0" ixz="0" iyy="0.0442" iyz="0" izz="0.00275"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="${-0.012851259*SCALE} 0 ${-0.030480*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link3.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <collision>
+      <origin xyz="${-0.012851259*SCALE} 0 ${-0.030480*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link3.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint_3" type="revolute">
+    <parent link="link_3"/>
+    <child link="j3_assembly"/>
+    <origin xyz="0 0 ${0.058420*SCALE}" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.8" upper="2.8" effort="50.0" velocity="3.0"/>
+    <dynamics damping="1.5" friction="0.2"/>
+  </joint>
+
+  <link name="j3_assembly">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="2.5"/>
+      <inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.03"/>
+    </inertial>
+  </link>
+
+  <link name="link_4">
+    <inertial>
+      <origin xyz="${-0.0055867814*SCALE} 0 ${0.0000728446*SCALE}" rpy="0 0 0"/>
+      <mass value="3.0"/>
+      <inertia ixx="0.00463" ixy="0" ixz="0" iyy="0.0155" iyz="0" izz="0.0162"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="${-0.012851259*SCALE} 0 ${-0.088900*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link4.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="blue_gray"/>
+    </visual>
+
+    <collision>
+      <origin xyz="${-0.012851259*SCALE} 0 ${-0.088900*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link4.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="j3_shaft_fixed" type="fixed">
+    <parent link="j3_assembly"/>
+    <child link="link_4"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="link_5">
+    <inertial>
+      <origin xyz="${-0.012851259*SCALE} 0 ${0.0310738772*SCALE}" rpy="0 0 0"/>
+      <mass value="1.5"/>
+      <inertia ixx="0.0456" ixy="0" ixz="0" iyy="0.0456" iyz="0" izz="0.00212"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="${-0.012851259*SCALE} 0 ${-0.088900*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link5.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <collision>
+      <origin xyz="${-0.012851259*SCALE} 0 ${-0.088900*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link5.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="j3_to_link5" type="fixed">
+    <parent link="j3_assembly"/>
+    <child link="link_5"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="joint_4" type="revolute">
+    <parent link="link_5"/>
+    <child link="j4_assembly"/>
+    <origin xyz="${-0.012930*SCALE} 0 ${0.061374*SCALE}" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-3.14159" upper="3.14159" effort="25.0" velocity="3.0"/>
+    <dynamics damping="1.0" friction="0.15"/>
+  </joint>
+
+  <link name="j4_assembly">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="link_6">
+    <inertial>
+      <origin xyz="${0.0041082373*SCALE} 0 ${0.0000000744*SCALE}" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.00121" ixy="0" ixz="0" iyy="0.00342" iyz="0" izz="0.00342"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="${0.000078741*SCALE} 0 ${-0.150274*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link6.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="blue_gray"/>
+    </visual>
+
+    <collision>
+      <origin xyz="${0.000078741*SCALE} 0 ${-0.150274*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/link6.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="j4_shaft_fixed" type="fixed">
+    <parent link="j4_assembly"/>
+    <child link="link_6"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="joint_5" type="revolute">
+    <parent link="j4_assembly"/>
+    <child link="j5_assembly"/>
+    <origin xyz="${0.008734741*SCALE} 0 ${0.004266*SCALE}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.5" upper="2.5" effort="10.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.1"/>
+  </joint>
+
+  <link name="j5_assembly">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <link name="joint5_part">
+    <inertial>
+      <origin xyz="${0.0000018123*SCALE} ${-0.000000564*SCALE} ${0.0015934129*SCALE}" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.00052" ixy="0" ixz="0" iyy="0.00052" iyz="0" izz="0.000435"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="${-0.008656*SCALE} 0 ${-0.154540*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/joint5_part.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="yellow"/>
+    </visual>
+
+    <collision>
+      <origin xyz="${-0.008656*SCALE} 0 ${-0.154540*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/joint5_part.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint5_part_fixed" type="fixed">
+    <parent link="j5_assembly"/>
+    <child link="joint5_part"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="joint_6" type="revolute">
+    <parent link="joint5_part"/>
+    <child link="tool0"/>
+    <origin xyz="${-0.000002907569*SCALE} 0 ${0.00865*SCALE}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.14159" upper="3.14159" effort="5.0" velocity="4.0"/>
+    <dynamics damping="0.3" friction="0.05"/>
+  </joint>
+
+  <link name="tool0">
+    <inertial>
+      <origin xyz="${-0.0000155731*SCALE} ${-0.003997625*SCALE} ${-0.0009860992*SCALE}" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.00281" ixy="0" ixz="0" iyy="0.00108" iyz="0" izz="0.00241"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="${-0.0086530924309*SCALE} 0 ${-0.1629464253783*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/tool.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+      <material name="dark_gray"/>
+    </visual>
+
+    <collision>
+      <origin xyz="${-0.0086530924309*SCALE} 0 ${-0.1629464253783*SCALE}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/anand/robotic_arm_ws/src/robotic_arm_description/meshes/tool.stl"
+              scale="${SCALE} ${SCALE} ${SCALE}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <ros2_control name="GazeboSimSystem" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+
+    <joint name="joint_1">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_2">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_3">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_4">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_5">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_6">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin filename="libgz_ros2_control-system.so"
+            name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>
+        robot_state_publisher
+      </robot_param_node>
+      <parameters>
+        /home/anand/robotic_arm_ws/src/robotic_arm_description/config/controllers.yaml
+      </parameters>
+      <position_proportional_gain>2.0</position_proportional_gain>
+    </plugin>
+  </gazebo>
+
+</robot>

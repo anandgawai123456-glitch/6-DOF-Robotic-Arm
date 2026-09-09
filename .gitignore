@@ -1,0 +1,29 @@
+# ROS2 / Colcon
+build/
+install/
+log/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary / backup files
+*.backup
+*.save
+*.before_*
+*.broken_*
+*~
+
+# Generated recordings
+mujoco/recorded_motion.json
+mujoco/recording_*.json
+
+# IDE / editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

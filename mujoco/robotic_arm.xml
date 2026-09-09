@@ -1,0 +1,530 @@
+<mujoco model="my_robotic_arm">
+
+    <compiler angle="radian"
+              meshdir="../../robotic_arm_ws/src/robotic_arm_description/meshes"/>
+
+    <option timestep="0.002"
+            gravity="0 0 -9.81"/>
+
+
+    <!-- ========================================================= -->
+    <!-- VISUAL SETTINGS                                           -->
+    <!-- ========================================================= -->
+
+    <visual>
+
+        <headlight diffuse="0.85 0.85 0.85"
+                    ambient="0.45 0.45 0.45"
+                    specular="0.25 0.25 0.25"/>
+
+        <map znear="0.01"
+             zfar="30"
+             stiffness="0.6"
+             stiffnessrot="0.3"
+             force="0.1"
+             torque="0.1"/>
+
+        <quality shadowsize="2048"/>
+
+    </visual>
+
+
+    <!-- ========================================================= -->
+    <!-- ASSETS                                                     -->
+    <!-- ========================================================= -->
+
+    <asset>
+
+        <!-- Light background -->
+        <texture name="light_sky"
+                 type="skybox"
+                 builtin="gradient"
+                 rgb1="0.98 0.98 0.98"
+                 rgb2="0.82 0.86 0.90"
+                 width="512"
+                 height="512"/>
+
+
+        <!-- Robot materials -->
+
+        <material name="mat_dark_gray"
+                  rgba="0.12 0.14 0.16 1"
+                  specular="0.5"
+                  shininess="0.5"/>
+
+        <material name="mat_orange"
+                  rgba="1.0 0.30 0.03 1"
+                  specular="0.45"
+                  shininess="0.5"/>
+
+        <material name="mat_orange_dark"
+                  rgba="0.70 0.16 0.02 1"
+                  specular="0.45"
+                  shininess="0.5"/>
+
+        <material name="mat_blue_gray"
+                  rgba="0.18 0.38 0.55 1"
+                  specular="0.55"
+                  shininess="0.6"/>
+
+        <material name="mat_yellow"
+                  rgba="1.0 0.75 0.02 1"
+                  specular="0.5"
+                  shininess="0.5"/>
+
+        <material name="mat_metal"
+                  rgba="0.35 0.38 0.42 1"
+                  specular="0.8"
+                  shininess="0.8"/>
+
+
+        <!-- ===================================================== -->
+        <!-- TOOL MATERIAL                                          -->
+        <!-- ===================================================== -->
+
+        <material name="mat_tool"
+                  rgba="0.02 0.65 1.0 1"
+                  specular="0.8"
+                  shininess="0.9"/>
+
+
+        <!-- TCP -->
+        <material name="mat_red"
+                  rgba="1.0 0.02 0.02 1"
+                  specular="0.6"
+                  shininess="0.6"/>
+
+
+        <!-- ===================================================== -->
+        <!-- MESHES                                                 -->
+        <!-- ===================================================== -->
+
+        <mesh name="base_mesh"
+              file="base.stl"
+              scale="10 10 10"/>
+
+        <mesh name="link1_mesh"
+              file="link1.stl"
+              scale="10 10 10"/>
+
+        <mesh name="link2_mesh"
+              file="link2.stl"
+              scale="10 10 10"/>
+
+        <mesh name="link3_mesh"
+              file="link3.stl"
+              scale="10 10 10"/>
+
+        <mesh name="link4_mesh"
+              file="link4.stl"
+              scale="10 10 10"/>
+
+        <mesh name="link5_mesh"
+              file="link5.stl"
+              scale="10 10 10"/>
+
+        <mesh name="link6_mesh"
+              file="link6.stl"
+              scale="10 10 10"/>
+
+        <mesh name="joint5_part_mesh"
+              file="joint5_part.stl"
+              scale="10 10 10"/>
+
+        <mesh name="tool_mesh"
+              file="tool.stl"
+              scale="10 10 10"/>
+
+    </asset>
+
+
+    <!-- ========================================================= -->
+    <!-- WORLD                                                      -->
+    <!-- ========================================================= -->
+
+    <worldbody>
+
+
+        <!-- ===================================================== -->
+        <!-- GROUND                                                 -->
+        <!-- ===================================================== -->
+
+        <geom name="ground"
+              type="plane"
+              size="3 3 0.1"
+              pos="0 0 0"
+              rgba="0.94 0.94 0.94 1"
+              friction="1 0.5 0.1"/>
+
+
+        <!-- ===================================================== -->
+        <!-- BASE                                                    -->
+        <!-- ===================================================== -->
+
+        <body name="base_link"
+              pos="0 0 0">
+
+            <inertial
+                pos="0 0 0.05291644"
+                mass="5.0"
+                diaginertia="0.0582 0.0585 0.1006"/>
+
+            <geom name="base"
+                  type="mesh"
+                  mesh="base_mesh"
+                  pos="0 0 0"
+                  material="mat_dark_gray"/>
+
+
+            <!-- ================================================= -->
+            <!-- LINK 1                                              -->
+            <!-- ================================================= -->
+
+            <body name="link_1"
+                  pos="0 0 0.13843">
+
+                <joint name="joint_1"
+                       type="hinge"
+                       axis="0 0 1"
+                       range="-3.14159 3.14159"
+                       damping="1.5"
+                       frictionloss="0.2"/>
+
+                <inertial
+                    pos="0 0 0.093244125"
+                    mass="3.5"
+                    diaginertia="0.0235 0.0235 0.00984"/>
+
+                <geom name="link1"
+                      type="mesh"
+                      mesh="link1_mesh"
+                      pos="0 0 -0.13843"
+                      material="mat_orange"/>
+
+
+                <!-- ============================================= -->
+                <!-- LINK 2                                            -->
+                <!-- ============================================= -->
+
+                <body name="link_2"
+                      pos="0.12851259 0 0.16637">
+
+                    <joint name="joint_2"
+                           type="hinge"
+                           axis="1 0 0"
+                           range="-2.6 2.6"
+                           damping="0.5"
+                           frictionloss="0.05"/>
+
+                    <inertial
+                        pos="-0.053474247 0 -0.003215252"
+                        mass="4.0"
+                        fullinertia="
+                            0.305181023827
+                            0.361752536299
+                            0.067654324643
+                            0.000000738802
+                            -0.082019239604
+                            0.000002810836"/>
+
+                    <geom name="link2"
+                          type="mesh"
+                          mesh="link2_mesh"
+                          pos="-0.12851259 0 -0.3048"
+                          material="mat_blue_gray"/>
+
+
+                    <body name="link2_to_link3"
+                          pos="0 0 0">
+
+
+                        <!-- ===================================== -->
+                        <!-- LINK 3                                -->
+                        <!-- ===================================== -->
+
+                        <body name="link_3"
+                              pos="0 0 0.5842">
+
+                            <inertial
+                                pos="0.000161292 0 0.292437523"
+                                mass="1.5"
+                                diaginertia="0.0443 0.0442 0.00275"/>
+
+                            <geom name="link3"
+                                  type="mesh"
+                                  mesh="link3_mesh"
+                                  pos="-0.12851259 0 -0.89"
+                                  material="mat_orange"/>
+
+
+                            <!-- ================================= -->
+                            <!-- JOINT 3 ASSEMBLY                  -->
+                            <!-- ================================= -->
+
+                            <body name="j3_assembly"
+                                  pos="0 0 0">
+
+                                <joint name="joint_3"
+                                       type="hinge"
+                                       axis="1 0 0"
+                                       range="-2.8 2.8"
+                                       damping="0.5"
+                                       frictionloss="0.05"/>
+
+                                <inertial
+                                    pos="0 0 0"
+                                    mass="2.5"
+                                    diaginertia="0.03 0.03 0.03"/>
+
+
+                                <body name="j3_shaft_fixed"
+                                      pos="0 0 0">
+
+
+                                    <!-- ========================= -->
+                                    <!-- LINK 4                    -->
+                                    <!-- ========================= -->
+
+                                    <body name="link_4"
+                                          pos="0 0 0">
+
+                                        <inertial
+                                            pos="-0.055867814 0 0.000728446"
+                                            mass="3.0"
+                                            fullinertia="
+                                                0.00463
+                                                0.0155
+                                                0.0162
+                                                0
+                                                0
+                                                0"/>
+
+                                        <geom name="link4"
+                                              type="mesh"
+                                              mesh="link4_mesh"
+                                              pos="-0.12851259 0 -0.889"
+                                              material="mat_blue_gray"/>
+
+                                    </body>
+
+                                </body>
+
+
+                                <!-- ================================= -->
+                                <!-- LINK 5                            -->
+                                <!-- ================================= -->
+
+                                <body name="j3_to_link5"
+                                      pos="0 0 0">
+
+                                    <body name="link_5"
+                                          pos="0 0 0">
+
+                                        <inertial
+                                            pos="-0.12851259 0 0.310738772"
+                                            mass="1.5"
+                                            diaginertia="0.0456 0.0456 0.00212"/>
+
+                                        <geom name="link5"
+                                              type="mesh"
+                                              mesh="link5_mesh"
+                                              pos="-0.12851259 0 -0.889"
+                                              material="mat_orange"/>
+
+
+                                        <!-- ========================= -->
+                                        <!-- JOINT 4                    -->
+                                        <!-- ========================= -->
+
+                                        <body name="j4_assembly"
+                                              pos="-0.1293 0 0.61374">
+
+                                            <joint name="joint_4"
+                                                   type="hinge"
+                                                   axis="1 0 0"
+                                                   range="-3.14159 3.14159"
+                                                   damping="0.5"
+                                                   frictionloss="0.05"/>
+
+                                            <inertial
+                                                pos="0 0 0"
+                                                mass="1.0"
+                                                diaginertia="0.01 0.01 0.01"/>
+
+
+                                            <body name="j4_shaft_fixed"
+                                                  pos="0 0 0">
+
+
+                                                <!-- ================= -->
+                                                <!-- LINK 6            -->
+                                                <!-- ================= -->
+
+                                                <body name="link_6"
+                                                      pos="0 0 0">
+
+                                                    <inertial
+                                                        pos="0.041082373 0 0.000000744"
+                                                        mass="1.0"
+                                                        fullinertia="
+                                                            0.00121
+                                                            0.00342
+                                                            0.00342
+                                                            0
+                                                            0
+                                                            0"/>
+
+                                                    <geom name="link6"
+                                                          type="mesh"
+                                                          mesh="link6_mesh"
+                                                          pos="0.00078741 0 -1.50274"
+                                                          material="mat_blue_gray"/>
+
+                                                </body>
+
+                                            </body>
+
+
+                                            <!-- ===================== -->
+                                            <!-- JOINT 5               -->
+                                            <!-- ===================== -->
+
+                                            <body name="j5_assembly"
+                                                  pos="0.08734741 0 0.04266">
+
+                                                <joint name="joint_5"
+                                                       type="hinge"
+                                                       axis="0 0 1"
+                                                       range="-3.14159 3.14159"
+                                                       damping="0.3"
+                                                       frictionloss="0.03"/>
+
+                                                <inertial
+                                                    pos="0 0 0"
+                                                    mass="0.5"
+                                                    diaginertia="0.005 0.005 0.005"/>
+
+
+                                                <body name="joint5_part_fixed"
+                                                      pos="0 0 0">
+
+                                                    <body name="joint5_part"
+                                                          pos="0 0 0">
+
+                                                        <inertial
+                                                            pos="0.000018123 -0.00000564 0.015934129"
+                                                            mass="0.5"
+                                                            fullinertia="
+                                                                0.00052
+                                                                0.00052
+                                                                0.000435
+                                                                0
+                                                                0
+                                                                0"/>
+
+                                                        <geom name="joint5_part"
+                                                              type="mesh"
+                                                              mesh="joint5_part_mesh"
+                                                              pos="-0.08656 0 -1.5454"
+                                                              material="mat_yellow"/>
+
+
+                                                        <!-- ================= -->
+                                                        <!-- TOOL / JOINT 6    -->
+                                                        <!-- ================= -->
+
+                                                        <body name="tool0"
+                                                              pos="-0.00002907569 -0.02705100 0.06650153">
+
+                                                            <joint name="joint_6"
+                                                                   type="hinge"
+                                                                   axis="0 1 0"
+                                                                   range="-3.14159 3.14159"
+                                                                   damping="0.2"
+                                                                   frictionloss="0.02"/>
+
+                                                            <inertial
+                                                                pos="-0.000155731 -0.03997625 -0.009860992"
+                                                                mass="0.6"
+                                                                fullinertia="
+                                                                    0.00281
+                                                                    0.00108
+                                                                    0.00241
+                                                                    0
+                                                                    0
+                                                                    0"/>
+
+
+                                                            <!-- ================= -->
+                                                            <!-- TOOL COLOR        -->
+                                                            <!-- ================= -->
+
+                                                            <geom name="tool"
+                                                                  type="mesh"
+                                                                  mesh="tool_mesh"
+                                                                  pos="-0.086530924309 0.05092700 -1.62946440"
+                                                                  material="mat_tool"/>
+
+
+                                                            <!-- ================= -->
+                                                            <!-- TCP                -->
+                                                            <!-- ================= -->
+
+                                                            <site name="tcp"
+                                                                  pos="-0.086530924309 0.05092700 -1.62946440"
+                                                                  size="0.008"
+                                                                  rgba="1 0 0 1"/>
+
+                                                        </body>
+
+                                                    </body>
+
+                                                </body>
+
+                                            </body>
+
+                                        </body>
+
+                                    </body>
+
+                                </body>
+
+                            </body>
+
+                        </body>
+
+                    </body>
+
+                </body>
+
+            </body>
+
+        </body>
+
+
+        <!-- ========================================================= -->
+        <!-- LIGHTING                                                   -->
+        <!-- ========================================================= -->
+
+        <light name="main_light"
+               pos="2 2 4"
+               dir="-2 -2 -4"
+               diffuse="0.9 0.9 0.9"
+               specular="0.5 0.5 0.5"
+               directional="true"/>
+
+        <light name="fill_light"
+               pos="-2 -1 3"
+               dir="2 1 -3"
+               diffuse="0.6 0.6 0.6"
+               specular="0.3 0.3 0.3"/>
+
+        <light name="front_light"
+               pos="0 -3 2"
+               dir="0 3 -2"
+               diffuse="0.45 0.45 0.45"
+               specular="0.2 0.2 0.2"/>
+
+    </worldbody>
+
+</mujoco>
