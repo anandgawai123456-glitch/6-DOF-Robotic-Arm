@@ -1,39 +1,37 @@
 # 🤖 6-DOF Robotic Arm Simulation
 
-## CodeAlpha Internship — Task 2: Robotic Arm Simulation
-
-A complete **6-DOF robotic arm simulation project** designed in **Onshape**, integrated into **MuJoCo**, and controlled using **Python and NumPy**.
+A complete **6-DOF robotic arm simulation and control project** designed in **Onshape**, integrated into **MuJoCo**, and controlled using **Python and NumPy**.
 
 The project combines **3D CAD modeling, robotic kinematics, inverse kinematics, Cartesian/TCP control, motion recording and playback, and basic pick-and-place manipulation**.
 
-The current system is also designed as a foundation for future **autonomous robotic manipulation**, including:
+The system is being developed as a foundation for an advanced autonomous manipulation platform with future integration of:
 
-* 🤖 Robotic Gripper
-* 📷 Camera Integration
-* 👁️ Computer Vision / OpenCV
-* 🧠 Reinforcement Learning
-* 🎯 Vision-Based Pick-and-Place
-* 🚀 Autonomous Manipulation
+- 🦾 Robotic Gripper
+- 📷 Camera
+- 👁️ Computer Vision / OpenCV
+- 🧠 Reinforcement Learning
+- 🎯 Vision-Based Pick-and-Place
+- 🚀 Autonomous Manipulation
 
 ---
 
 # 📌 Project Overview
 
-The robotic arm was initially designed and modeled as a 3D CAD assembly using **Onshape**.
+The robotic arm was designed and modeled as a 3D CAD assembly using **Onshape**.
 
-The CAD geometry was then exported as STL meshes and integrated into a **MuJoCo 3.12.0** simulation model.
+The CAD geometry was exported as STL meshes and integrated into a **MuJoCo 3.12.0** simulation model.
 
 The robot is controlled using Python and NumPy, with implementations for:
 
-* Joint-space control
-* Forward kinematics
-* Jacobian calculation
-* Numerical inverse kinematics
-* Cartesian motion
-* TCP/tool-space control
-* Pick-and-place
-* Motion recording
-* Motion playback
+- Joint-space control
+- Forward kinematics
+- Jacobian calculation
+- Numerical inverse kinematics
+- Cartesian motion
+- TCP/tool-space control
+- Pick-and-place
+- Motion recording
+- Motion playback
 
 The overall development pipeline is:
 
@@ -66,17 +64,11 @@ The overall development pipeline is:
                        │
                        ▼
                Motion Playback
-```
-
----
-
-# ⭐ Major Features
-
-## 1. 6-DOF Robotic Arm
+⭐ Major Features
+1. 6-DOF Robotic Arm
 
 The project contains a complete six-degree-of-freedom robotic arm.
 
-```text
 Joint 1
    │
 Joint 2
@@ -90,42 +82,32 @@ Joint 5
 Joint 6
    │
   TCP
-```
 
 Joint names:
 
-```text
 joint_1
 joint_2
 joint_3
 joint_4
 joint_5
 joint_6
-```
 
-Total:
+Total: 6 DOF
 
-```text
-6 DOF
-```
+⭐ 2. CAD Design Using Onshape
 
----
-
-# ⭐ 2. CAD Design Using Onshape
-
-The robotic arm was designed as a 3D mechanical assembly using **Onshape**.
+The robotic arm was designed as a 3D mechanical assembly using Onshape.
 
 The CAD design includes:
 
-* Base
-* Multiple robotic links
-* Six rotational joints
-* End-effector/tool components
-* TCP/tool reference
+Base
+Robotic links
+Six rotational joints
+End-effector/tool components
+TCP/tool reference
 
 The CAD geometry was exported and integrated into the simulation.
 
-```text
 Onshape
    ↓
 3D Assembly
@@ -135,50 +117,50 @@ Individual Components
 STL Export
    ↓
 MuJoCo / ROS2 Integration
-```
 
 Mesh files are stored inside:
 
-```text
 src/robotic_arm_description/meshes/
-```
 
----
+Main components include:
 
-# ⭐ 3. MuJoCo Simulation
+base.stl
+link1.stl
+link2.stl
+link3.stl
+link4.stl
+link5.stl
+link6.stl
+joint5_part.stl
+tool.stl
+tool2.stl
+⭐ 3. MuJoCo Simulation
 
 The primary robotic simulation is implemented using:
 
-```text
 MuJoCo 3.12.0
-```
 
 Main model:
 
-```text
 mujoco/robotic_arm.xml
-```
 
 The MuJoCo model contains:
 
-* Robot bodies
-* Joints
-* Joint limits
-* Visual geometry
-* Collision geometry
-* TCP definition
-* Robot configuration
-* Simulation parameters
+Robot bodies
+Revolute joints
+Joint limits
+Visual geometry
+Collision geometry
+TCP definition
+Robot configuration
+Simulation parameters
 
-MuJoCo provides the physics and simulation environment used for testing robotic motion.
+MuJoCo provides the physics and simulation environment used for testing and developing robotic motion.
 
----
-
-# ⭐ 4. Forward Kinematics
+⭐ 4. Forward Kinematics
 
 Forward kinematics calculates the TCP position and orientation from the robot's joint configuration.
 
-```text
 Joint Angles
      │
      ▼
@@ -191,21 +173,14 @@ Forward Kinematics
 TCP Position
 +
 TCP Orientation
-```
 
 Testing script:
 
-```text
 mujoco/test_fk.py
-```
-
----
-
-# ⭐ 5. Jacobian Calculation
+⭐ 5. Jacobian Calculation
 
 The robot Jacobian is used to relate joint motion to Cartesian motion.
 
-```text
 Joint Velocity
       │
       ▼
@@ -213,22 +188,15 @@ Joint Velocity
       │
       ▼
 Cartesian Velocity
-```
 
 Related scripts:
 
-```text
 mujoco/test_jacobian.py
 mujoco/verify_jacobian.py
-```
-
----
-
-# ⭐ 6. Numerical Inverse Kinematics
+⭐ 6. Numerical Inverse Kinematics
 
 Numerical inverse kinematics is used to calculate the required joint configuration for a desired TCP position.
 
-```text
 Desired TCP Position
          │
          ▼
@@ -239,27 +207,21 @@ Desired TCP Position
          │
          ▼
     Robot Motion
-```
 
 Main files:
 
-```text
 mujoco/ik_solver.py
 mujoco/ik_motion_demo.py
 mujoco/ik_visualize.py
-```
 
 This provides the mathematical foundation required for autonomous target reaching and future vision-based manipulation.
 
----
-
-# ⭐ 7. Cartesian / TCP Control
+⭐ 7. Cartesian / TCP Control
 
 The robotic arm can be controlled using the Tool Center Point.
 
 Instead of manually specifying every joint angle, a target can be defined in Cartesian space.
 
-```text
 Cartesian Target
        │
        ▼
@@ -273,35 +235,27 @@ Joint Configuration
        │
        ▼
 Robot Motion
-```
 
-This approach provides the foundation for:
+This provides the foundation for:
 
-* Target reaching
-* Object approach
-* Pick-and-place
-* Vision-guided positioning
-* Autonomous manipulation
+Target reaching
+Object approach
+Pick-and-place
+Vision-guided positioning
+Autonomous manipulation
+🔥 8. Motion Recording and Playback
+A Major Project Feature
 
----
-
-# ⭐ 8. Motion Recording and Playback
-
-## 🔥 Major Project Feature
-
-One of the major features of this project is the ability to **record robotic-arm motion and reproduce it through playback**.
+One of the major features of this project is the ability to record robotic-arm motion and reproduce it through playback.
 
 The motion recording system captures the robot's movement during simulation and stores the trajectory for later use.
 
 Main implementation:
 
-```text
 mujoco/motion_recorder.py
-```
 
-The concept is:
+The recording pipeline is:
 
-```text
 Robot Controller
        │
        ▼
@@ -315,11 +269,9 @@ Motion Recorder
        │
        ▼
 Saved Trajectory
-```
 
-The recorded trajectory can then be used for playback:
+The saved trajectory can then be used for playback:
 
-```text
 Saved Trajectory
        │
        ▼
@@ -333,28 +285,25 @@ Joint Commands
        │
        ▼
 Reproduced Motion
-```
+Why Motion Recording Matters
 
-### Why Motion Recording Is Important
-
-Motion recording is more than a debugging feature.
+Motion recording is not only a debugging capability.
 
 It provides a foundation for:
 
-* Repeating robotic movements
-* Saving successful manipulation trajectories
-* Motion analysis
-* Trajectory comparison
-* Demonstration-based robotics
-* Creating training datasets
-* Learning from demonstrations
-* Reinforcement-learning data generation
-* Trajectory optimization
-* Future sim-to-real development
+Repeating robotic movements
+Saving successful trajectories
+Motion analysis
+Trajectory comparison
+Demonstration-based robotics
+Creating training datasets
+Learning from demonstrations
+Reinforcement-learning data generation
+Trajectory optimization
+Future sim-to-real development
 
-The long-term idea is:
+The long-term concept is:
 
-```text
 Manual / Programmed Motion
           │
           ▼
@@ -368,19 +317,15 @@ Manual / Programmed Motion
           │
           ▼
  Autonomous Robot Policy
-```
 
-This makes the motion-recording system an important bridge between **traditional programmed robotics and future learning-based robotics**.
+This creates a bridge between traditional programmed robotics and learning-based robotics.
 
----
-
-# ⭐ 9. Pick-and-Place
+⭐ 9. Pick-and-Place
 
 A basic pick-and-place workflow is implemented as part of the current project.
 
 Conceptually:
 
-```text
 Home
   │
   ▼
@@ -400,71 +345,58 @@ Place
   │
   ▼
 Return
-```
 
-Run the demonstration using:
+Run the demonstration:
 
-```bash
 python3 mujoco/pick_place_demo.py
-```
 
-The current pick-and-place system provides the foundation for future gripper-based and vision-based manipulation.
+The current implementation provides the foundation for future gripper-based and vision-based manipulation.
 
----
+🦾 Future: Robotic Gripper
 
-# 🦾 Future: Robotic Gripper
-
-The next major development stage is the integration of a dedicated robotic gripper.
+The next major development stage is integration of a dedicated robotic gripper.
 
 Planned capabilities include:
 
-* Gripper modeling
-* Gripper joints
-* Open/close control
-* Object contact
-* Grasping
-* Object release
-* Collision-aware grasping
-* Pick-and-place with physical gripping
-* Gripper control through ROS2
+Gripper modeling
+Gripper joints
+Open/close control
+Object contact
+Grasping
+Object release
+Collision-aware grasping
+Pick-and-place with physical gripping
+Gripper control through ROS2
 
-Future workflow:
+Future architecture:
 
-```text
 6-DOF Arm
     +
 Robotic Gripper
     │
     ▼
 Object Manipulation
-```
-
-The current end-effector/tool structure provides the starting point for this development.
-
----
-
-# 📷 Future: Camera and Computer Vision
+📷 Future: Camera and Computer Vision
 
 A simulated camera will be integrated into the robotic environment.
 
-Computer vision will be developed using **OpenCV**.
+Computer vision will be developed using OpenCV.
 
 Planned capabilities include:
 
-* Camera simulation
-* Image acquisition
-* Image processing
-* Object detection
-* Object localization
-* Object tracking
-* Object position estimation
-* Camera-to-robot coordinate transformation
-* Vision-based target generation
-* Visual servoing
+Camera simulation
+Image acquisition
+Image processing
+Object detection
+Object localization
+Object tracking
+Object position estimation
+Camera-to-robot coordinate transformation
+Vision-based target generation
+Visual servoing
 
 Future vision pipeline:
 
-```text
 Camera
    │
    ▼
@@ -484,31 +416,26 @@ Target Position
    │
    ▼
 Robot
-```
+🧠 Future: Reinforcement Learning
 
----
-
-# 🧠 Future: Reinforcement Learning
-
-Reinforcement Learning will be introduced to move the project toward **learning-based robotic control**.
+Reinforcement Learning will be introduced to move the project toward learning-based robotic control.
 
 Potential applications include:
 
-* Robot reaching
-* Motion optimization
-* Target reaching
-* Pick-and-place learning
-* Grasping policies
-* Reward-based control
-* Trajectory optimization
-* Autonomous manipulation
-* Simulation-based training
-* Policy evaluation in MuJoCo
-* Future sim-to-real experimentation
+Robot reaching
+Motion optimization
+Target reaching
+Pick-and-place learning
+Grasping policies
+Reward-based control
+Trajectory optimization
+Autonomous manipulation
+Simulation-based training
+Policy evaluation in MuJoCo
+Future sim-to-real experimentation
 
-The planned RL architecture is:
+Planned RL architecture:
 
-```text
              Robot State
                   │
                   ▼
@@ -527,21 +454,17 @@ The planned RL architecture is:
             RL Training
                   │
                   └──────────► Updated Policy
-```
 
 Motion recording will also provide a potential source of trajectory data for future learning systems.
 
----
-
-# 🚀 Long-Term Autonomous Manipulation
+🚀 Long-Term Autonomous Manipulation
 
 The long-term goal is to combine:
 
-**Camera + Computer Vision + IK + Motion Planning + Reinforcement Learning + Robotic Gripper**
+Camera + Computer Vision + IK + Motion Planning + Reinforcement Learning + Robotic Gripper
 
 into a single autonomous manipulation pipeline.
 
-```text
                          CAMERA
                             │
                             ▼
@@ -579,66 +502,31 @@ into a single autonomous manipulation pipeline.
                             │
                             ▼
                        OBJECT RELEASE
-```
 
-The final objective is to progress from manually programmed robot motion toward **perception-driven, learning-based autonomous manipulation**.
+The final objective is to progress from manually programmed robot motion toward perception-driven, learning-based autonomous manipulation.
 
----
+🧪 Testing and Validation
 
-# 🧪 Testing and Validation
+The repository contains multiple scripts for testing different components of the robotic system.
 
-The repository contains multiple scripts for testing different parts of the robotic system.
-
-## MuJoCo Model
-
-```bash
+MuJoCo Model
 python3 mujoco/test_mujoco.py
-```
-
-## Forward Kinematics
-
-```bash
+Forward Kinematics
 python3 mujoco/test_fk.py
-```
-
-## Inverse Kinematics
-
-```bash
+Inverse Kinematics
 python3 mujoco/test_ik.py
-```
-
-## Jacobian
-
-```bash
+Jacobian
 python3 mujoco/test_jacobian.py
-```
-
-## Jacobian Verification
-
-```bash
+Jacobian Verification
 python3 mujoco/verify_jacobian.py
-```
-
-## TCP Inspection
-
-```bash
+TCP Inspection
 python3 mujoco/inspect_tcp.py
-```
-
-## Individual Joint Testing
-
-```bash
+Individual Joint Testing
 python3 mujoco/test_joint1.py
 python3 mujoco/test_joint2.py
 python3 mujoco/test_joint3.py
 python3 mujoco/test_joint4.py
-```
-
----
-
-# 📂 Project Structure
-
-```text
+📂 Project Structure
 robotic_arm_ws/
 │
 ├── README.md
@@ -677,169 +565,110 @@ robotic_arm_ws/
     │
     └── arm_diagnostics/
         └── ...
-```
-
----
-
-# 🛠️ Software and Technologies
-
-| Technology                 | Purpose                                   |
-| -------------------------- | ----------------------------------------- |
-| **Onshape**                | 3D CAD design and robotic-arm modeling    |
-| **MuJoCo 3.12.0**          | Physics and robotic simulation            |
-| **Python 3**               | Controller and simulation programming     |
-| **NumPy**                  | Numerical calculations, kinematics and IK |
-| **XML**                    | MuJoCo robot model configuration          |
-| **ROS2 Humble**            | Robotics middleware and integration       |
-| **Gazebo**                 | Additional robotics simulation            |
-| **OpenCV**                 | Planned computer-vision integration       |
-| **Reinforcement Learning** | Planned learning-based robot control      |
-| **Ubuntu Linux**           | Development environment                   |
-
----
-
-# 🖥️ Environment
-
-Development environment:
-
-```text
+🛠️ Software and Technologies
+Technology	Purpose
+Onshape	3D CAD design and robotic-arm modeling
+MuJoCo 3.12.0	Physics and robotic simulation
+Python 3	Controller and simulation programming
+NumPy	Numerical calculations, kinematics and IK
+XML	MuJoCo robot model configuration
+ROS2 Humble	Robotics middleware and integration
+Gazebo	Additional robotics simulation
+OpenCV	Planned computer-vision integration
+Reinforcement Learning	Planned learning-based robot control
+Ubuntu Linux	Development environment
+🖥️ Development Environment
 Operating System : Ubuntu 22.04
 ROS              : ROS2 Humble
 Python           : Python 3
 MuJoCo           : 3.12.0
 Numerical Library: NumPy
 CAD              : Onshape
-```
-
----
-
-# ⚙️ Installation
+⚙️ Installation
 
 Clone the repository:
 
-```bash
 git clone <YOUR-GITHUB-REPOSITORY-URL>
 cd robotic_arm_ws
-```
 
 Install Python dependencies:
 
-```bash
 python3 -m pip install -r requirements.txt
-```
 
 Or:
 
-```bash
 python3 -m pip install mujoco numpy
-```
-
----
-
-# ▶️ Running the Simulation
+▶️ Running the Simulation
 
 Navigate to the project:
 
-```bash
 cd robotic_arm_ws
-```
 
 Run the main MuJoCo visualization:
 
-```bash
 python3 mujoco/view_robotic_arm.py
-```
 
 Alternative viewer:
 
-```bash
 python3 mujoco/view_mujoco.py
-```
-
----
-
-# 🎯 Running Pick-and-Place
+🎯 Running Pick-and-Place
 
 Run:
 
-```bash
 python3 mujoco/pick_place_demo.py
-```
 
 This demonstrates the current pick-and-place motion workflow.
 
----
-
-# 🤖 ROS2 Support
+🤖 ROS2 Support
 
 The repository also contains ROS2 packages for future robotics-system integration.
 
-```text
 src/
 ├── robotic_arm_description/
 ├── robotic_arm_controller/
 └── arm_diagnostics/
-```
-
-### Robotic Arm Description
-
-```text
+Robotic Arm Description
 src/robotic_arm_description/
-```
 
 Contains:
 
-* URDF
-* Xacro
-* STL meshes
-* Gazebo configuration
-* ROS2 control configuration
-* Launch files
-
-### Robotic Arm Controller
-
-```text
+URDF
+Xacro
+STL meshes
+Gazebo configuration
+ROS2 control configuration
+Launch files
+Robotic Arm Controller
 src/robotic_arm_controller/
-```
 
 Contains the ROS2 controller implementation.
 
-### Arm Diagnostics
-
-```text
+Arm Diagnostics
 src/arm_diagnostics/
-```
 
 Contains diagnostic and monitoring functionality.
 
-The primary CodeAlpha demonstration is currently based on **MuJoCo + Python**, while the ROS2 components provide a foundation for further integration.
+The primary simulation is currently based on MuJoCo + Python, while the ROS2 components provide a foundation for further robotics integration.
 
----
-
-# 📊 Current Results
+📊 Current Results
 
 The current implementation demonstrates:
 
-* ✅ Complete 6-DOF robotic-arm model
-* ✅ Onshape CAD integration
-* ✅ STL mesh integration
-* ✅ MuJoCo simulation
-* ✅ Joint-space control
-* ✅ Forward kinematics
-* ✅ Jacobian calculation
-* ✅ Numerical inverse kinematics
-* ✅ Cartesian/TCP control
-* ✅ Basic pick-and-place
-* ✅ Motion recording
-* ✅ Motion playback
-* ✅ ROS2 robot description
-* ✅ Gazebo integration support
-
----
-
-# 🗺️ Development Roadmap
-
-```text
+✅ Complete 6-DOF robotic-arm model
+✅ Onshape CAD integration
+✅ STL mesh integration
+✅ MuJoCo simulation
+✅ Joint-space control
+✅ Forward kinematics
+✅ Jacobian calculation
+✅ Numerical inverse kinematics
+✅ Cartesian/TCP control
+✅ Basic pick-and-place
+✅ Motion recording
+✅ Motion playback
+✅ ROS2 robot description
+✅ Gazebo integration support
+🗺️ Development Roadmap
                     CURRENT
                        │
                        ▼
@@ -878,47 +707,35 @@ The current implementation demonstrates:
              └─────────┼─────────┘
                        ▼
              AUTONOMOUS MANIPULATION
-```
+🔮 Future Scope
 
----
+The project will progressively evolve toward a complete autonomous robotics platform.
 
-# 🔮 Future Scope
-
-The project will progressively evolve toward a more complete autonomous robotics platform.
-
-### Robotics
-
-* Robotic gripper
-* Improved end-effector
-* Collision-aware manipulation
-* Motion planning
-* MoveIt 2 integration
-* ROS2 control
-* Real robot hardware integration
-
-### Computer Vision
-
-* Simulated camera
-* OpenCV processing
-* Object detection
-* Object tracking
-* Object pose estimation
-* Vision-based target generation
-* Visual servoing
-
-### Artificial Intelligence
-
-* Reinforcement Learning
-* Learning from demonstrations
-* Trajectory datasets
-* Learned manipulation policies
-* Reward-based motion optimization
-* Autonomous task execution
-* Sim-to-real experimentation
-
-### Advanced Manipulation
-
-```text
+Robotics
+Robotic gripper
+Improved end-effector
+Collision-aware manipulation
+Motion planning
+MoveIt 2 integration
+ROS2 control
+Real robot hardware integration
+Computer Vision
+Simulated camera
+OpenCV processing
+Object detection
+Object tracking
+Object pose estimation
+Vision-based target generation
+Visual servoing
+Artificial Intelligence
+Reinforcement Learning
+Learning from demonstrations
+Trajectory datasets
+Learned manipulation policies
+Reward-based motion optimization
+Autonomous task execution
+Sim-to-real experimentation
+Advanced Manipulation
 Camera
    +
 Computer Vision
@@ -932,76 +749,62 @@ Reinforcement Learning
 Gripper
    =
 Autonomous Robotic Manipulation
-```
+📸 Project Screenshot
 
----
+A simulation screenshot is included in the repository:
 
-# 📸 Project Screenshot
-
-A simulation screenshot is included:
-
-```text
 screenshot.png
-```
 
-Additional simulation screenshots and demonstration videos can be added as the project develops.
+Additional screenshots and demonstration videos can be added as the project develops.
 
----
+🧩 Project Philosophy
 
-# 🎓 CodeAlpha Internship
+This project is being developed as a progressive robotics platform rather than a single isolated simulation.
 
-**Internship:** CodeAlpha
+The development strategy is:
 
-**Task:** Task 2 — Robotic Arm Simulation
+Build the Robot
+      ↓
+Understand the Kinematics
+      ↓
+Control the Motion
+      ↓
+Record the Motion
+      ↓
+Build Trajectory Data
+      ↓
+Add Perception
+      ↓
+Add Grasping
+      ↓
+Add Learning
+      ↓
+Achieve Autonomous Manipulation
 
-**Project:** Design and Simulation of a 6-DOF Robotic Arm
+The objective is to combine classical robotics engineering with modern AI-based robotics.
 
-**CAD:** Onshape
+🚀 Future Vision
 
-**Simulation:** MuJoCo 3.12.0
+The final system is intended to move toward a robot that can:
 
-**Programming:** Python / NumPy
+SEE
+ │
+ ▼
+UNDERSTAND
+ │
+ ▼
+PLAN
+ │
+ ▼
+MOVE
+ │
+ ▼
+GRASP
+ │
+ ▼
+MANIPULATE
+ │
+ ▼
+LEARN
 
-**Robotics:** Kinematics, Inverse Kinematics, Cartesian Control, TCP Control, Pick-and-Place
-
-**Major Feature:** Motion Recording and Playback
-
-**Future Development:** Robotic Gripper, Camera/OpenCV, Reinforcement Learning, Autonomous Manipulation
-
----
-
-# 👨‍💻 Project Direction
-
-This project is being developed as more than a basic robotic-arm simulation.
-
-The current 6-DOF arm and motion-recording system provide the foundation for progressively adding **perception, learning, grasping, and autonomous decision-making**.
-
-The intended evolution is:
-
-```text
-Simulation
-    ↓
-Kinematics
-    ↓
-Motion Control
-    ↓
-Motion Recording
-    ↓
-Motion Dataset
-    ↓
-Computer Vision
-    ↓
-Gripper
-    ↓
-Reinforcement Learning
-    ↓
-Autonomous Manipulation
-```
-
-The ultimate objective is to build a robotic system capable of **seeing an object, understanding its location, planning a motion, grasping it, and placing it at a desired target using a combination of classical robotics and learning-based control**.
-
----
-
-# 📄 License
-
-This project is intended for educational, internship, research, and robotics-development purposes.
+The long-term vision is a simulation-first autonomous robotic manipulation platform where perception, kinematics, motion planning, recorded demonstrations, reinforcement learning, and physical interaction work together.
