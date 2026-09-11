@@ -17,6 +17,8 @@ The system is being developed as a foundation for an advanced autonomous manipul
 
 # 📌 Project Overview
 
+# Project google drive : https://drive.google.com/drive/folders/1zI7Om8c3v6hVQdilzjn1Yb7eo9JEky6u
+
 The robotic arm was designed and modeled as a 3D CAD assembly using **Onshape**.
 
 The CAD geometry was exported as STL meshes and integrated into a **MuJoCo 3.12.0** simulation model.
@@ -808,3 +810,6 @@ MANIPULATE
 LEARN
 
 The long-term vision is a simulation-first autonomous robotic manipulation platform where perception, kinematics, motion planning, recorded demonstrations, reinforcement learning, and physical interaction work together.
+
+
+
